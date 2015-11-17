@@ -10,62 +10,101 @@
 	</head>
 
 	<body>
-		<table width=100% height=100% cellspacing=0>
-			<tr width=100% height=50%>
-				<td id="inscriptions_block" class="principal_block" width=50%>
-					<form enctype='multipart/form-data'>
-						<h1>Inscription</h1>
-						<label for="nom">Nom : </label><input id="nom" type="text" name="nom" size=10/>
-						<label for="prenom">Prénom : </label><input id="prenom" type="text" name="prenom" size=10/>
-						<label for="pseudo">Pseudo : </label><input id="pseudo" type="text" name="pseudo" size=10/><br>
-						<br>
-						<label for="mail">Mail : </label><input id="mail" type="mail" name="mail"  size=20/>
-						<label for="tel">Tel : </label><input id="tel" type="text" name="tel"  size=6/><br>
-						<br>
-						<label for='photo'>Photo : </label><input type='file' name='photo' id="photo"><br>
-						<br>
-						<label for='sprint'> Sprint</label><input type="checkbox" name="sprint" id="sprint" value="sprint">
-						<label for='endurance'> Endurance</label><input type="checkbox" name="endurance" id="endurance" value="endurance">
-						<label for='autre'> Autre</label><input type="checkbox" name="autre" id="autre" value="autre">
-						<br><br>
-						<button id="submit" type="submit">Inscription</button>
-					</form>
-				</td>
-				<td id="inscrits_block" class="principal_block" width=50%>
-					<h1>Liste des inscrits</h1>
-					<table cellspacing=15>
-						<tr>
-							<th align=center>pseudo</th>
-							<th align=center>Vélo</td>
-							<th align=center>Sprint</th>
-							<th align=center>Endurance</th>
-							<th align=center>Autre</th>
-						</tr>
-						<tr>
-							<td align=center>MysterYo</th>
-							<td align=center><img src="images/participant1.png" width=50 height=50></td>
-							<td align=center>oui</td>
-							<td align=center>oui</td>
-							<td align=center>???</td>
-						</tr>
+		<div id="top_block">
+			<div id="inscriptions_block" class="principal_block">
+				<form enctype='multipart/form-data' action="" method="post" id="inscription_form">
+					<h1>Inscription</h1>
+					<label>Pseudo : </label><input id="pseudo" type="text" name="pseudo" value="pseudo" size=10><br>
+
 					
-					</table>
-					<ul id="liste_participants">
-					</ul>
-				
-				</td>
-			</tr>
-			<tr width=100% height=50%>
-				<td id="album_block" class="principal_block" width=50%>
-				
-				
-				</td>
-				<td id="media_block"class="principal_block" width=50%>
-				
-				
-				</td>
-			</tr>
-		</table>
+					<label>Nom : </label><input id="nom" type="text" name="nom" value="nom"size=10>
+					<label>Prénom : </label><input id="prenom" type="text" name="prenom" value="prenom" size=10><br>
+					<br>
+					
+					<label>Mail : </label><input id="mail" type="mail" name="mail" value="mail" size=20>
+					<label>Tel : </label><input id="tel" type="text" name="tel" value="tel" size=6><br>
+					<br>
+					
+					<label>Photo : </label><input type='file' name='photo' id="photo"><br>
+					<br>
+					
+					<label> Sprint</label><input type="checkbox" name="sprint" id="sprint" value="sprint" checked>
+					<label> Endurance</label><input type="checkbox" name="endurance" id="endurance" value="endurance">
+					<label> Autre</label><input type="checkbox" name="autre" id="autre" value="autre">
+					<br><br>
+					
+					<input type="submit" value="inscription" class="submit"/>
+				</form>
+			</div>
+			<div id="inscrits_block" class="principal_block">
+				<h1>Liste des inscrits</h1>
+				<table cellspacing=15 id="liste_participants" width=100%>
+					<tr>
+						<th align=center>pseudo</th>
+						<th align=center>Vélo</th>
+						<th align=center>Sprint</th>
+						<th align=center>Endurance</th>
+						<th align=center>Autre</th>
+					</tr>
+				</table>				
+			</div>
+		</div>
+		<div id="bottom_block">
+			<div id="album_block" class="principal_block">
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+			</div>
+			<div id="media_block" class="principal_block">
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+			</div>
+		</div>
 	</body>
 	<script type="text/javascript" src="script.js"> </script>
 </html>
