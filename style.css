@@ -1,4 +1,4 @@
-html, body{
+html, body hr{
 	margin:0;
 	padding:0;
 	height:100%;
@@ -27,23 +27,27 @@ h1{
 
 
 #inscriptions_block{
-overflow:auto;
-text-align:left;
-background:#1E90FF;
+	overflow:auto;
+	text-align:left;
+	background:#1E90FF;
 }
-#inscriptions_block form{
-margin:20px;
+#inscription_form{
+	margin:20px;
+}
+#inscription_form td{
+width:25%;
 }
 
 #inscrits_block{
-overflow:auto;
-background:#90EE90;
+	overflow:auto;
+	background:#90EE90;
 }
+
 #album_block{
-overflow:hidden;
-background:#7F7F7F;
+	overflow:hidden;
+	background:#7F7F7F;
 }
 #media_block{
-overflow:hidden;
-background:#A52A2A;
+	overflow:hidden;
+	background:#A52A2A;
 }

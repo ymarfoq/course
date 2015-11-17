@@ -2,10 +2,6 @@ $(document).ready(function (e) {
 
 	$('#inscription_form').on('submit',(function(e){
 		e.preventDefault();
-		//var form=$("#inscription_form");
-		//var pseudo=$("#pseudo").val();
-		//var data = {"surnom": surnom};
-		//var data = new FormData(this);
 		$.ajax({
 			type: 'POST',
 			url: 'data.php',
@@ -13,47 +9,47 @@ $(document).ready(function (e) {
 			cache: false,
 			processData: false,
 			data: new FormData(this)});
-		$('#liste_participants').append(''
-			+'<tr>'
+		if($("#sprint").is(":checked")){var sprint = "images/tick.png";}else{var sprint = "images/cross.png";};
+		if($("#endurance").is(":checked")){var endurance = "images/tick.png";}else{var endurance = "images/cross.png";};
+		if($("#autre").is(":checked")){var autre = "images/tick.png";}else{var autre = "images/cross.png";};
+		var photo=$("#load_photo").attr('src');
+		$('#first_line').after(''
+			+'<tr title="'+$("#description").val()+'">'
 				+'<td class="pseudo" align=center>'+$("#pseudo").val()+'</td>'
-				+'<td class="photo" align=center><img src="images/participant1.png" width=50 height=50></td>'
-				+'<td class="sprint" align=center>oui</td>'
-				+'<td class="endurance" align=center>oui</td>'
-				+'<td class="autre" align=center>???</td>'
-			+'</tr>'
+				+'<td class="photo" align=center><img src="'+photo+'" height=50></td>'
+				+'<td class="sprint" align=center><img src="'+sprint+'" height=25></td>'
+				+'<td class="endurance" align=center><img src="'+endurance+'" height=25></td>'
+				+'<td class="autre" align=center><img src="'+autre+'" height=25></td>'
+			+'</tr><tr><td colspan=5><hr></td></tr>'
 		);
 		return false;
 	}));
+
+
+
+	// Function to preview image after validation
+	$(function() {
+		$("#photo").change(function() {
+			var file = this.files[0];
+			var imagefile = file.type;
+			var match= ["image/jpeg","image/png","image/jpg"];
+			if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
+				$('#load_photo').attr('src','photo/origine.png');
+				return false;
+			}
+			else{
+				var reader = new FileReader();
+				reader.onload = imageIsLoaded;
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+	});
+
+	function imageIsLoaded(e) {
+		$("#photo").css("color","green");
+		//$('#load_photo').css("display", "block");
+		$('#load_photo').attr('src', e.target.result);
+		$('#load_photo').attr('height', '50px');
+	};
 });
 
-/*
-// Function to preview image after validation
-$(function() {
-$("#file").change(function() {
-$("#message").empty(); // To remove the previous error message
-var file = this.files[0];
-var imagefile = file.type;
-var match= ["image/jpeg","image/png","image/jpg"];
-if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
-{
-$('#previewing').attr('src','noimage.png');
-$("#message").html("<p id='error'>Please Select A valid Image File</p>"+"<h4>Note</h4>"+"<span id='error_message'>Only jpeg, jpg and png Images type allowed</span>");
-return false;
-}
-else
-{
-var reader = new FileReader();
-reader.onload = imageIsLoaded;
-reader.readAsDataURL(this.files[0]);
-}
-});
-});
-function imageIsLoaded(e) {
-$("#file").css("color","green");
-$('#image_preview').css("display", "block");
-$('#previewing').attr('src', e.target.result);
-$('#previewing').attr('width', '250px');
-$('#previewing').attr('height', '230px');
-};
-});
-*/
