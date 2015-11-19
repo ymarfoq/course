@@ -8,20 +8,27 @@ $(document).ready(function (e) {
 			contentType: false,
 			cache: false,
 			processData: false,
-			data: new FormData(this)});
-		if($("#sprint").is(":checked")){var sprint = "images/tick.png";}else{var sprint = "images/cross.png";};
-		if($("#endurance").is(":checked")){var endurance = "images/tick.png";}else{var endurance = "images/cross.png";};
-		if($("#autre").is(":checked")){var autre = "images/tick.png";}else{var autre = "images/cross.png";};
-		var photo=$("#load_photo").attr('src');
-		$('#first_line').after(''
-			+'<tr title="'+$("#description").val()+'">'
-				+'<td class="pseudo" align=center>'+$("#pseudo").val()+'</td>'
-				+'<td class="photo" align=center><img src="'+photo+'" height=50></td>'
-				+'<td class="sprint" align=center><img src="'+sprint+'" height=25></td>'
-				+'<td class="endurance" align=center><img src="'+endurance+'" height=25></td>'
-				+'<td class="autre" align=center><img src="'+autre+'" height=25></td>'
-			+'</tr><tr><td colspan=5><hr></td></tr>'
-		);
+			data: new FormData(this)})
+			.done(function(data) {
+				if($("#sprint").is(":checked")){var sprint = "images/tick.png";}else{var sprint = "images/cross.png";};
+				if($("#endurance").is(":checked")){var endurance = "images/tick.png";}else{var endurance = "images/cross.png";};
+				if($("#autre").is(":checked")){var autre = "images/tick.png";}else{var autre = "images/cross.png";};
+				var photo=$("#load_photo").attr('src');
+				$('#first_line').after(''
+					+'<tr title="'+$("#description").val()+'">'
+					+'<td class="pseudo" align=center>'+$("#pseudo").val()+'</td>'
+					+'<td class="photo" align=center><img src="'+photo+'" height=50></td>'
+					+'<td class="sprint" align=center><img src="'+sprint+'" height=25></td>'
+					+'<td class="endurance" align=center><img src="'+endurance+'" height=25></td>'
+					+'<td class="autre" align=center><img src="'+autre+'" height=25></td>'
+					+'<td align=center><form action="data.php" method="post">'
+						+'<input type="hidden" name="action" value="supprimer">'
+						+'<input type="hidden" name="mail" value="'+$("#mail").val()+'">'
+						+'<input type="submit" value="x">'
+					+'</form></td>'
+				+'</tr><tr><td colspan=5><hr></td></tr>'
+				);
+			});
 		return false;
 	}));
 

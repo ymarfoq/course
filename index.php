@@ -1,5 +1,11 @@
+<?php
+session_start();
+if(isset($_POST['connexion'])){
+	if($_POST['connexion']=='trophée900'){$_SESSION['admin']=1;}
+	else{$_SESSION['admin']=0;}
+}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -10,9 +16,16 @@
 	</head>
 
 	<body>
+		<form method='post' id='admin'>
+<?php
+if($_SESSION['admin']){echo '<input type="hidden" name="connexion"><input type="submit" value="deconnexion">';}
+else{echo '<input type="password" name="connexion" size=10><input type="submit" value=";)">';}
+?>
+		</form>
 		<div id="top_block">
 			<div id="inscriptions_block" class="principal_block">
 				<form enctype='multipart/form-data' action="" method="post" id="inscription_form">
+					<input type='hidden' name='action' value='inscription'>
 					<h1>Inscription</h1>
 					<table>
 						<tr>
@@ -78,13 +91,20 @@ $conn = new PDO('sqlite:base.db');
 		if($participant["sprint"]==1){$sprint = 'images/tick.png';}else{$sprint = 'images/cross.png';}
 		if($participant["endurance"]==1){$endurance = 'images/tick.png';}else{$endurance = 'images/cross.png';}
 		if($participant["autre"]==1){$autre = 'images/tick.png';}else{$autre = 'images/cross.png';}
-				echo 	"<tr title='".$participant["description"]."'>
+				echo 	"<tr id='".$participant["id"]."' title='".$participant["description"]."'>
 							<td align=center>".$participant["pseudo"]."</td>
 							<td align=center><img src='".$participant["photo"]."' height=50></td>
 							<td align=center><img src='".$sprint."' height=25></td>
 							<td align=center><img src='".$endurance."' height=25></td>
-							<td align=center><img src='".$autre."' height=25></td>
-				</tr><tr><td colspan=5><hr></td></tr>";
+							<td align=center><img src='".$autre."' height=25></td>";
+				if($_SESSION['admin']){
+					echo "<td align=center><form action='data.php' method='post'>
+							<input type='hidden' name='action' value='supprimer'>
+							<input type='hidden' name='mail' value='".$participant["mail"]."'>
+							<input type='submit' value='x'>
+						</form></td>";
+					}
+					echo "</tr><tr><td colspan=5><hr></td></tr>";
 			}
 ?>
 				</table>				
