@@ -121,18 +121,24 @@ $conn = new PDO('sqlite:base.db');
 						<div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
 					</div>
 					<div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden;">
-						<div data-p="112.50" style="display: none;">
-							<img data-u="image" src="img/02.jpg" />
-						</div>
-						<div data-p="112.50" style="display: none;">
-							<img data-u="image" src="img/04.jpg" />
-						</div>
-						<div data-p="112.50" style="display: none;">
-							<img data-u="image" src="img/05.jpg" />
-						</div>
-						<div data-p="112.50" style="display: none;">
-							<img data-u="image" src="img/09.jpg" />
-						</div>
+<?php					
+	$photos = $conn->query('SELECT * FROM photos ORDER BY ID DESC;')->fetchAll();
+	
+	foreach ($photos as $photo){
+				echo 	"<div data-p='112.50' style='display: none;'>
+							<img data-u='image' src='".$photo['adress']."'/>
+						</div>";
+	}
+	if($_SESSION['admin']){
+					echo "<div data-p='112.50' style='display: none;'>
+							<form action='data.php' method='post'>
+								<input type='hidden' name='action' value='ajouter_photos'>
+								<input type='file' name='album_photo[]'>
+								<input type='submit' value='ajouter'>
+							</form>
+						</div>";
+					}
+?>
 					</div>
 					<!-- Bullet Navigator -->
 					<div data-u="navigator" class="jssorb05" style="bottom:16px;right:6px;" data-autocenter="1">
@@ -142,7 +148,6 @@ $conn = new PDO('sqlite:base.db');
 					<!-- Arrow Navigator -->
 					<span data-u="arrowleft" class="jssora12l" style="top:123px;left:0px;width:30px;height:46px;" data-autocenter="2"></span>
 					<span data-u="arrowright" class="jssora12r" style="top:123px;right:0px;width:30px;height:46px;" data-autocenter="2"></span>
-					<a href="http://www.jssor.com" style="display:none">Jssor Slider</a>
 				</div>
 			</div>
 			<div id="media_block" class="principal_block">
