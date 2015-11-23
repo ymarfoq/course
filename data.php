@@ -44,5 +44,20 @@ elseif($action=="supprimer"){
 	$sth=$conn->exec('DELETE FROM participants WHERE mail="'.$mail.'";');
 	header('Location:./');
 }
-
+elseif($action=="ajouter_photos"){
+	if(count($_FILES['album_photo']['name'])) {
+		foreach ($_FILES['album_photo']['name'] as $position => $file) {
+			$adresse = "album/".strtolower($file);
+			echo $adresse;
+			move_uploaded_file($_FILES['album_photo']['tmp_name'][(string)$position],$adresse);
+			$sth=$conn->exec('INSERT INTO photos(adress) VALUES("'.$adresse.'");');
+		}
+	}
+	header('Location:./');
+}
+elseif($action=="supprimer_photo"){
+	
+	$sth=$conn->exec('DELETE FROM photos WHERE id="'.$_POST['id'].'";');
+	header('Location:./');
+}
 ?>
