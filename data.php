@@ -16,9 +16,17 @@ $conn->exec("CREATE TABLE IF NOT EXISTS participants(
 					endurance BOOLEAN DEFAULT 0,
 					autre BOOLEAN DEFAULT 0,
 					inscription_moment TEXT);");
+
 $action=$_POST['action'];
 
-if($action=="inscription"){
+if($action=="verification"){
+	$exist=$conn->query('SELECT COUNT(*) as count FROM participants WHERE pseudo="'.$_POST["pseudo"].'";')->fetch();
+	echo $exist['count'];
+}elseif($action=="verification_mail"){
+	$exist=$conn->query('SELECT COUNT(*) as count FROM participants WHERE mail="'.$_POST["mail"].'";')->fetch();
+	echo $exist['count'];
+}
+elseif($action=="inscription"){
 	$nom = $_POST['nom'];
 	$prenom = $_POST['prenom'];
 	$pseudo = $_POST['pseudo'];
@@ -60,4 +68,5 @@ elseif($action=="supprimer_photo"){
 	$sth=$conn->exec('DELETE FROM photos WHERE id="'.$_POST['id'].'";');
 	header('Location:./');
 }
+
 ?>
