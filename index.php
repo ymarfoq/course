@@ -1,5 +1,6 @@
 <?php
 session_start();
+$conn = new PDO('sqlite:base.db');
 if(isset($_POST['connexion'])){
 	if($_POST['connexion']=='trophée900'){$_SESSION['admin']=1;}
 	else{$_SESSION['admin']=0;}
@@ -84,10 +85,7 @@ else{echo '<input type="password" name="connexion" size=10><input type="submit" 
 					<tr id="first_line"><td height=10 colspan=5></td></tr>
 
 <?php
-$conn = new PDO('sqlite:base.db');
-					
 	$participants = $conn->query('SELECT * FROM participants ORDER BY ID DESC;')->fetchAll();
-	
 	foreach ($participants as $participant){
 		if($participant["sprint"]==1){$sprint = 'images/tick.png';}else{$sprint = 'images/cross.png';}
 		if($participant["endurance"]==1){$endurance = 'images/tick.png';}else{$endurance = 'images/cross.png';}
@@ -95,9 +93,9 @@ $conn = new PDO('sqlite:base.db');
 				echo 	"<tr id='".$participant["id"]."' title='".$participant["description"]."'>
 							<td align=left>".$participant["pseudo"]."</td>
 							<td><img src='".$participant["photo"]."' height=50></td>
-							<td><img src='".$sprint."' height=25></td>
-							<td><img src='".$endurance."' height=25></td>
-							<td><img src='".$autre."' height=25></td>";
+							<td><img src='".$sprint."' height=15></td>
+							<td><img src='".$endurance."' height=15></td>
+							<td><img src='".$autre."' height=15></td>";
 				if($_SESSION['admin']){
 					echo "<td align=center><form action='data.php' method='post'>
 							<input type='hidden' name='action' value='supprimer'>
@@ -133,7 +131,7 @@ $conn = new PDO('sqlite:base.db');
 						}
 						if($_SESSION['admin']){
 							echo "<div data-p='112.50' style='display: none;'>
-									<form action='data.php' method='post' enctype='multipart/form-data'>
+									<form style='margin:20px;' action='data.php' method='post' enctype='multipart/form-data'>
 										<input type='hidden' name='action' value='ajouter_photos' >
 										<input type='file' name='album_photo[]' multiple>
 										<input type='submit' value='ajouter'>
@@ -154,6 +152,24 @@ $conn = new PDO('sqlite:base.db');
 		</div>
 		<div id="media_block" class="principal_block">
 			<div class="titre"><h1>Discussions</h1></div>
+			<table id="tableDiscussion" cellspacing="0">
+				<tr>
+<?php
+$discussions = $conn->query('SELECT discussionId,discussionName FROM discussions;')->fetchAll();
+foreach ($discussions as $discussion){
+	echo "<th class='titreDiscussion' id='discussion".$discussion['discussionId']."'>".$discussion['discussionName']."</th>";
+}
+?>
+					<th class="titreDiscussion" id="ajoutDiscussion">+</th>
+				</tr>
+				<tr>
+					<td colspan=5>
+						<p id="Discussion">
+							Choisi une discussion à suivre.
+						</p>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</body>
 	<script type="text/javascript" src="js/script.js"> </script>

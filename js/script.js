@@ -1,5 +1,9 @@
 $(document).ready(function (e) {
 
+	try {
+		var discussionIdGet = decodeURIComponent(window.location.search.match(/(\?|&)discussion\=([^&]*)/)[2]);
+	}
+	catch (e) {var discussionIdGet=""};
 	var verif_mail=false;
 	var verif_pseudo=false
 
@@ -103,29 +107,39 @@ $(document).ready(function (e) {
 		}
 	}));
 
+	$('.titreDiscussion').click((function(e){
+		$.ajax({
+			type: 'POST',
+			url: 'data.php',
+			data: 'action=changeDiscussion&discussionId=' + this.id
+			})
+			.done(function (data) {
+			$("#Discussion").html(data);
+			});
+		}));
+
 	// Function to preview image after validation
-	$(function() {
-		$("#photo").change(function() {
-			var file = this.files[0];
-			var imagefile = file.type;
-			var match= ["image/jpeg","image/png","image/jpg"];
-			if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
-				$('#load_photo').attr('src','photo/origine.png');
-				return false;
-			}
-			else{
-				var reader = new FileReader();
-				reader.onload = imageIsLoaded;
-				reader.readAsDataURL(this.files[0]);
-			}
-		});
-	});
+	$(function() {$("#photo").change(function() {
+		var file = this.files[0];
+		var imagefile = file.type;
+		var match= ["image/jpeg","image/png","image/jpg"];
+		if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
+			$('#load_photo').attr('src','photo/origine.png');
+			return false;
+		}
+		else{
+			var reader = new FileReader();
+			reader.onload = imageIsLoaded;
+			reader.readAsDataURL(this.files[0]);
+		}
+	});});
+
+	$("#discussion"+discussionIdGet).click();
 
 
 
 	function imageIsLoaded(e) {
 		$("#photo").css("color","green");
-		//$('#load_photo').css("display", "block");
 		$('#load_photo').attr('src', e.target.result);
 		$('#load_photo').attr('height', '50px');
 	};
