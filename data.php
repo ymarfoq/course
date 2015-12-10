@@ -17,12 +17,27 @@ $conn->exec("CREATE TABLE IF NOT EXISTS participants(
 					autre BOOLEAN DEFAULT 0,
 					inscription_moment TEXT);");
 
+$conn->exec("CREATE TABLE IF NOT EXISTS photos(
+                                        id INTEGER PRIMARY KEY,
+                                        adress TEXT);");
+
+$conn->exec("CREATE TABLE IF NOT EXISTS discussions(
+                                        id INTEGER PRIMARY KEY,
+                                        discussionId INTEGER,
+                                        discussionName TEXT,
+                                        auteur TEXT,
+                                        date TEXT,
+                                        time TEXT,
+                                        message TEXT);");
+
+
 $action=$_POST['action'];
 
 if($action=="verification"){
 	$exist=$conn->query('SELECT COUNT(*) as count FROM participants WHERE pseudo="'.$_POST["pseudo"].'";')->fetch();
 	echo $exist['count'];
-}elseif($action=="verification_mail"){
+}
+elseif($action=="verification_mail"){
 	$exist=$conn->query('SELECT COUNT(*) as count FROM participants WHERE mail="'.$_POST["mail"].'";')->fetch();
 	echo $exist['count'];
 }
@@ -56,7 +71,6 @@ elseif($action=="ajouter_photos"){
 	if(count($_FILES['album_photo']['name'])) {
 		foreach ($_FILES['album_photo']['name'] as $position => $file) {
 			$adresse = "album/".strtolower($file);
-			echo $adresse;
 			move_uploaded_file($_FILES['album_photo']['tmp_name'][(string)$position],$adresse);
 			$sth=$conn->exec('INSERT INTO photos(adress) VALUES("'.$adresse.'");');
 		}
@@ -64,9 +78,33 @@ elseif($action=="ajouter_photos"){
 	header('Location:./');
 }
 elseif($action=="supprimer_photo"){
-	
 	$sth=$conn->exec('DELETE FROM photos WHERE id="'.$_POST['id'].'";');
 	header('Location:./');
 }
+elseif($action=="ajoutDiscussion"){
+	$count=$conn->query('SELECT MAX(discussionId) as max from discussions;')->fetch();
+	$conn->exec('INSERT INTO discussions(discussionId, discussionName) VALUES('.($count["max"]+1).',"'.$_POST["discussionName"].'");');
+	header('Location:./?discussion='.($count["max"]+1));
+}
+elseif($action=="changeDiscussion"){
+	if($_POST["discussionId"]=="ajoutDiscussion"){
+		echo "<form method=POST action='data.php'>
+				<input type='hidden' name='action' value='ajoutDiscussion'>
+				<input type='text' name='discussionName'>
+				<input type='submit'>
+		</form>";
+	}
+	else {
+		$messages = $conn->query('SELECT * FROM discussions WHERE discussionId="'.substr($_POST["discussionId"],10).'";')->fetchAll();
+		foreach ($messages as $message) {
+			if ($message['message'] != "") {
+				echo "<div>
+						<p>De <span>" . $message['auteur'] . "</span>, le <span>" . $message['date'] . ", à " . $message['time'] . "</span> : </p>
+						<p>" . $message['message'] . "</p>
+					</div>";
+			};
+		};
+	};
+};
 
 ?>

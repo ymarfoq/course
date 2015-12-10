@@ -3,6 +3,7 @@
 	padding:0;
 	font-size:12px;
 }
+
 input[type=text], input[type=mail]{
 	height:25px;
 	background-color: #d7ecff;
@@ -19,6 +20,7 @@ textarea{
 	padding:5px;
 
 }
+
 .titre{
 	margin:0;
 	overflow:hidden;
@@ -102,6 +104,7 @@ h1{
 	bottom:1%;
 	left:1%;
 }
+
 #media_block{
 	top:51%;
 	right:1%;
@@ -133,7 +136,6 @@ h1{
 .jssorb05 div:hover, .jssorb05 .av:hover { background-position: -97px -7px; }
 .jssorb05 .av { background-position: -97px -7px; }
 .jssorb05 .dn, .jssorb05 .dn:hover { background-position: -97px -7px; }
-
 /* jssor slider arrow navigator skin 12 css */
 /*
 .jssora12l                  (normal)
@@ -159,4 +161,50 @@ h1{
 .jssora12r:hover { background-position: -195px -37px; }
 .jssora12l.jssora12ldn { background-position: -256px -37px; }
 .jssora12r.jssora12rdn { background-position: -315px -37px; }
+
+
+#tableDiscussion{
+	position:relative;
+	top:-1px;
+	left:-1px;
+	width:101%;
+}
+.titreDiscussion{
+	border-right:1px solid black;
+	border-left:1px solid black;
+	border-bottom:1px solid black;
+	height:30px;
+	cursor:pointer;
+}
+
+.titreDiscussion:hover{
+	background: #d3be79;
+	border-top:1px solid #d3be79;
+}
+
+#Discussion{
+	margin:20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
