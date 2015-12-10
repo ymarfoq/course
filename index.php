@@ -35,37 +35,39 @@ else{echo '<input type="password" name="connexion" size=10><input type="submit" 
 						<td colspan=2></td>
 						</tr>
 					<tr>
-						<td><label>Nom : </label></td>
-						<td><input id="nom" type="text" name="nom" size=10></td>
 						<td><label>Prénom : </label></td>
 						<td><input id="prenom" type="text" name="prenom" size=10></td>
+						<td><label>Nom : </label></td>
+						<td><input id="nom" type="text" name="nom" size=10></td>
 						</tr>
 					<tr>
 						<td><label>Mail : </label></td>
 						<td colspan=3><input id="mail" type="mail" name="mail" value="nom@mail.com" size=25></td>
 						</tr>
-					<tr>
+					<tr><td colspan=4><br></td></tr>
+					<!--<tr>
 						<td><label>Tel : </label></td>
 						<td><input id="tel" type="text" name="tel" value="(514)-000-0000" size=10></td>
 						<td colspan=2></td>
-						</tr>
+						</tr>-->
 					<tr>
-						<td><label>Photo : </label></td>
+						<td><label>Image de mon vélo : </label></td>
 						<td colspan=2><input type='file' name='photo' id="photo"></td>
 						<td><img id="load_photo" src="photos/origine.png" alt="vélo" height=50></td>
 					</tr>
 					<tr>
-						<td colspan=4><textarea name="description" id="description" cols=80% rows=6>Qui es-tu?</textarea></td>
+						<td colspan=4><textarea name="description" id="description" cols=80% rows=3>Quelques mots sur moi...</textarea></td>
 					</tr>
+					<tr><td colspan=4><br></td></tr>
+					<tr><td colspan=4><h3>A quelle course voulez-vous participer?</h3></td></tr>
 					<tr>
 						<td><label> Sprint</label><input type="checkbox" name="sprint" id="sprint" value="sprint" checked></td>
 						<td><label> Endurance</label><input type="checkbox" name="endurance" id="endurance" value="endurance"></td>
 						<td><label> Autre</label><input type="checkbox" name="autre" id="autre" value="autre"></td>
 						<td></td>
-						<td></td>
 					</tr>
 					<tr>
-						<td colspan="5"><input type="submit" value="inscription" class="submit"/></td>
+						<td colspan="4"><input type="submit" value="inscription" class="submit"/></td>
 					</tr>
 				</table>
 			</form>
