@@ -162,7 +162,7 @@ else{echo '<input type="password" name="connexion" size=10><input type="submit" 
 				<tr>
 					<th class="titreOrganisation" id='benevole'>Bénévoles</th>
 					<th class="titreOrganisation" id='parcours'>Parcours</th>
-					<th class="titreOrganisation" id='partenaire'>Partenaire</th>
+					<th class="titreOrganisation" id='partenaires'>Partenaires</th>
 				</tr>
 			</table>
 			<article id="organisationSubBlock">

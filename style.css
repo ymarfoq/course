@@ -112,7 +112,7 @@ h1{
 	left:50.5%;
 }
 
-#organisationSubBlock{
+#organisationSubBlock .text{
 	position:relative;
 	height:90%;
 	width:100%;
@@ -120,7 +120,8 @@ h1{
 	margin-left:20px;
 	margin-right:-20px;
 	margin-bottom:-50px;
-	margin-top:10px;}
+	margin-top:10px;
+	z-index:5;}
 
 /* jssor slider bullet navigator skin 05 css */
 /*
@@ -178,6 +179,7 @@ h1{
 	top:-1px;
 	left:-1px;
 	width:100.5%;
+	z-index:100;
 }
 .titreOrganisation{
 	border-right:1px solid black;
@@ -186,13 +188,10 @@ h1{
 	border-radius:0 0 30px 30px;
 	height:30px;
 	cursor:pointer;
+	z-index:100;
 }
 
 .titreOrganisation:hover, .titreOrganisationSelect{
 	background: #d3be79;
 	border-top:1px solid #d3be79;
-}
-
-#organisationBlock{
-	margin:20px;
 }
