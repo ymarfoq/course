@@ -51,7 +51,7 @@ h1{
 
 .principal_block{
 	position:absolute;
-	border-radius:20px;
+	border-radius:30px;
 	border: 2px solid rgba(83, 83, 83, 0.82);
 	background: rgba(36, 139, 200, 0.55);
 	overflow:hidden;
@@ -105,12 +105,22 @@ h1{
 	left:1%;
 }
 
-#media_block{
+#organisation_block{
 	top:51%;
 	right:1%;
 	bottom:1%;
 	left:50.5%;
 }
+
+#organisationSubBlock{
+	position:relative;
+	height:90%;
+	width:100%;
+	overflow-y:auto;
+	margin-left:20px;
+	margin-right:-20px;
+	margin-bottom:-50px;
+	margin-top:10px;}
 
 /* jssor slider bullet navigator skin 05 css */
 /*
@@ -163,48 +173,26 @@ h1{
 .jssora12r.jssora12rdn { background-position: -315px -37px; }
 
 
-#tableDiscussion{
+#tableOrganisation{
 	position:relative;
 	top:-1px;
 	left:-1px;
-	width:101%;
+	width:100.5%;
 }
-.titreDiscussion{
+.titreOrganisation{
 	border-right:1px solid black;
 	border-left:1px solid black;
 	border-bottom:1px solid black;
+	border-radius:0 0 30px 30px;
 	height:30px;
 	cursor:pointer;
 }
 
-.titreDiscussion:hover{
+.titreOrganisation:hover, .titreOrganisationSelect{
 	background: #d3be79;
 	border-top:1px solid #d3be79;
 }
 
-#Discussion{
+#organisationBlock{
 	margin:20px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

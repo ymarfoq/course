@@ -107,14 +107,17 @@ $(document).ready(function (e) {
 		}
 	}));
 
-	$('.titreDiscussion').click((function(e){
+	$('.titreOrganisation').click((function(e){
+		var id=this.id;
 		$.ajax({
 			type: 'POST',
 			url: 'data.php',
-			data: 'action=changeDiscussion&discussionId=' + this.id
+			data: 'action=changeOrganisation&organisationId=' + id
 			})
 			.done(function (data) {
-			$("#Discussion").html(data);
+			$("#organisationSubBlock").html(data);
+			$(".titreOrganisation").removeClass("titreOrganisationSelect");
+			$("#"+id).addClass("titreOrganisationSelect");
 			});
 		}));
 
@@ -144,7 +147,7 @@ $(document).ready(function (e) {
 		$('#load_photo').attr('height', '50px');
 	};
            
-	var jssor_1_SlideshowTransitions = [{$Duration:3000,$Opacity:2}];            
+	var jssor_1_SlideshowTransitions = [{$Duration:5000,$Opacity:5}];            
 	var jssor_1_options = {
 		$AutoPlay: true,
 		$SlideshowOptions: {

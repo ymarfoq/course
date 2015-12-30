@@ -25,6 +25,7 @@ if($_SESSION['admin']){echo '<input type="hidden" name="connexion"><input type="
 else{echo '<input type="password" name="connexion" size=10><input type="submit" value=";)">';}
 ?>
 		</form>
+		
 		<div id="inscriptions_block" class="principal_block">
 			<div class="titre"><h1>Inscription</h1></div>
 			<form enctype='multipart/form-data' action="" method="post" id="inscription_form">
@@ -73,6 +74,7 @@ else{echo '<input type="password" name="connexion" size=10><input type="submit" 
 				</table>
 			</form>
 		</div>
+		
 		<div id="inscrits_block" class="principal_block">
 			<div class="titre"><h1>Liste des inscrits</h1></div>
 			<table cellspacing=0 id="liste_participants">
@@ -111,6 +113,7 @@ else{echo '<input type="password" name="connexion" size=10><input type="submit" 
 				</tbody>
 			</table>
 		</div>
+		
 		<div id="album_block" class="principal_block">
 			<div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden; visibility: hidden;">
 				<div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden;">
@@ -152,27 +155,22 @@ else{echo '<input type="password" name="connexion" size=10><input type="submit" 
 				<span data-u="arrowright" class="jssora12r" style="top:123px;right:0px;width:30px;height:46px;" data-autocenter="2"></span>
 			</div>
 		</div>
-		<div id="media_block" class="principal_block">
-			<div class="titre"><h1>Discussions</h1></div>
-			<table id="tableDiscussion" cellspacing="0">
+		
+		<div id="organisation_block" class="principal_block">
+			<div class="titre"><h1>Organisation</h1></div>
+			<table id="tableOrganisation" cellspacing="0">
 				<tr>
-<?php
-$discussions = $conn->query('SELECT discussionId,discussionName FROM discussions;')->fetchAll();
-foreach ($discussions as $discussion){
-	echo "<th class='titreDiscussion' id='discussion".$discussion['discussionId']."'>".$discussion['discussionName']."</th>";
-}
-?>
-					<th class="titreDiscussion" id="ajoutDiscussion">+</th>
-				</tr>
-				<tr>
-					<td colspan=5>
-						<p id="Discussion">
-							Choisi une discussion à suivre.
-						</p>
-					</td>
+					<th class="titreOrganisation" id='benevole'>Bénévoles</th>
+					<th class="titreOrganisation" id='parcours'>Parcours</th>
+					<th class="titreOrganisation" id='partenaire'>Partenaire</th>
 				</tr>
 			</table>
+			<article id="organisationSubBlock">
+						<!--<iframe src="https://www.google.com/maps/embed?pb=!1m44!1m12!1m3!1d1726.7477048256383!2d-73.6320638675518!3d45.53347948644472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m29!3e1!4m3!3m2!1d45.5329384!2d-73.63089169999999!4m3!3m2!1d45.5332945!2d-73.6315323!4m3!3m2!1d45.533725499999996!2d-73.6321443!4m3!3m2!1d45.5341575!2d-73.6307394!4m3!3m2!1d45.533834299999995!2d-73.6294856!4m3!3m2!1d45.533060899999995!2d-73.6301455!4m3!3m2!1d45.532936899999996!2d-73.6308954!5e1!3m2!1sfr!2sca!4v1451446952849" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+
+			</article>
 		</div>
+	
 	</body>
 	<script type="text/javascript" src="js/script.js"> </script>
 </html>
