@@ -1,9 +1,10 @@
 $(document).ready(function (e) {
 
 	try {
-		var discussionIdGet = decodeURIComponent(window.location.search.match(/(\?|&)discussion\=([^&]*)/)[2]);
+		var organisation = decodeURIComponent(window.location.search.match(/(\?|&)organisation=([^&]*)/)[2]);
 	}
-	catch (e) {var discussionIdGet=""};
+	catch (e) {var organisation="parcours"};
+	
 	var verif_mail=false;
 	var verif_pseudo=false
 
@@ -121,7 +122,6 @@ $(document).ready(function (e) {
 			});
 		}));
 
-	// Function to preview image after validation
 	$(function() {$("#photo").change(function() {
 		var file = this.files[0];
 		var imagefile = file.type;
@@ -136,10 +136,6 @@ $(document).ready(function (e) {
 			reader.readAsDataURL(this.files[0]);
 		}
 	});});
-
-	$("#discussion"+discussionIdGet).click();
-
-
 
 	function imageIsLoaded(e) {
 		$("#photo").css("color","green");
@@ -182,4 +178,6 @@ $(document).ready(function (e) {
 	$(window).bind("resize", ScaleSlider);
 	$(window).bind("orientationchange", ScaleSlider);
 	//responsive code end
+	
+	$("#"+organisation).click();
 });

@@ -1,44 +1,20 @@
 <?php
+session_start();
+if(!isset($_SESSION['admin'])){$_SESSION['admin']=0;};
 
-$connStr = 'sqlite:base.db';
-$conn = new PDO($connStr);
 
-$conn->exec("CREATE TABLE IF NOT EXISTS participants(
-					id INTEGER PRIMARY KEY,
-					pseudo TEXT,
-					nom TEXT,
-					prenom TEXT,
-					photo TEXT,
-					mail TEXT,
-					tel TEXT,
-					description TEXT,
-					sprint BOOLEAN DEFAULT 0,
-					endurance BOOLEAN DEFAULT 0,
-					autre BOOLEAN DEFAULT 0,
-					inscription_moment TEXT);");
+$conn = new PDO('sqlite:base.db');
 
-$conn->exec("CREATE TABLE IF NOT EXISTS photos(
-                                        id INTEGER PRIMARY KEY,
-                                        adress TEXT);");
+$conn->exec("CREATE TABLE IF NOT EXISTS participants(id INTEGER PRIMARY KEY,pseudo TEXT,nom TEXT,prenom TEXT,photo TEXT,mail TEXT,tel TEXT,description TEXT,sprint BOOLEAN DEFAULT 0,endurance BOOLEAN DEFAULT 0,autre BOOLEAN DEFAULT 0,inscription_moment TEXT);");
 
-$conn->exec("CREATE TABLE IF NOT EXISTS discussions(
-                                        id INTEGER PRIMARY KEY,
-                                        discussionId INTEGER,
-                                        discussionName TEXT,
-                                        auteur TEXT,
-                                        date TEXT,
-                                        time TEXT,
-                                        message TEXT);");
+$conn->exec("CREATE TABLE IF NOT EXISTS photos(id INTEGER PRIMARY KEY,adress TEXT);");
 
-$conn->exec("CREATE TABLE IF NOT EXISTS benevoles(
-                                        id INTEGER PRIMARY KEY,
-                                        prenom TEXT,
-                                        nom TEXT,
-                                        mail TEXT,
-                                        motivation TEXT);");
+$conn->exec("CREATE TABLE IF NOT EXISTS discussions(id INTEGER PRIMARY KEY,discussionId INTEGER,discussionName TEXT,auteur TEXT,date TEXT,time TEXT,message TEXT);");
+
+$conn->exec("CREATE TABLE IF NOT EXISTS benevoles(id INTEGER PRIMARY KEY,prenom TEXT,nom TEXT,mail TEXT,motivation TEXT);");
+                                      
+$conn->exec("CREATE TABLE IF NOT EXISTS partenaires(id INTEGER PRIMARY KEY,nom TEXT,site TEXT,logo TEXT,contact TEXT);");                                       
                                         
-
-
 $action=$_POST['action'];
 
 if($action=="verification"){
@@ -165,11 +141,37 @@ function initMap() {
     ';
 	}
 	elseif($_POST["organisationId"]=="partenaires"){
-		echo "
-		<div class='text'>
-			<p>liste des partenaires</p>
-		</div>
-		";
+		echo "<div class=\"text\">";
+		if($_SESSION['admin']){echo "
+			<form method=POST action='data.php'>
+				<input type='hidden' name='action' value='ajoutPartenaire'>
+				<table>
+					<tr>
+						<td><label>Nom : </label></td>
+						<td><input type='text' name='nom'></td>
+					</tr>
+					<tr>
+						<td><label>Site : </label></td>
+						<td><input type='text' name='site'></td>
+					</tr>
+					<tr>
+						<td><label>Url du logo : </label></td>
+						<td><input type='text' name='logo'></td>
+					</tr>
+					<tr>
+						<td><label>Contact : </label></td>
+						<td><input type='text' name='contact'></td>
+					</tr>
+					<tr><td><input value='Ajout du partenaire' type='submit'></td></tr>
+				</table>
+			</form>
+			";
+		};
+		$partenaires=$conn->query('SELECT * FROM partenaires;')->fetchAll();
+		foreach ($partenaires as $partenaire){
+			echo "<a href=\"".$partenaire['site']."\" target=\"_blank\" style=\"display:inline-block; margin:20px;\"><img src=\"".$partenaire['logo']."\" height=100></a>";
+		};
+		echo "</div>";
 	};
 }
 elseif($action=="ajoutBenevole"){
@@ -184,9 +186,11 @@ elseif($action=="ajoutBenevole"){
 	Vous pouvez le(a) joindre à l'adresse suivante : ".$_POST['mail'].".";
 	if(mail("marfoq.yohan@gmail.com" , "Nouveau bébévole ;-)", $mail, 'From: webmaster@coursevelosurneige.com')){echo "envoie ok";};
 	
-	header('Location:./');
+	header('Location:./?organisation=benevole');
+}
+elseif($action=="ajoutPartenaire"){
+	$sth=$conn->exec('INSERT INTO partenaires(nom, site, logo ,contact) VALUES("'.$_POST['nom'].'","'.$_POST['site'].'","'.$_POST['logo'].'","'.$_POST['contact'].'");');
+	header('Location:./?organisation=partenaires');
 };
-
-
 
 ?>
